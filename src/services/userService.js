@@ -23,9 +23,8 @@ export const userService = {
     return response.data;
   },
 
-  getPublicProfile: async (username) => {
-    // This would be a public endpoint - for now we'll use the current user
-    const response = await api.get('/users/profile');
+   getPublicProfile: async (username) => {
+    const response = await api.get(`/users/public/${username}`);
     return response.data;
   }
 };

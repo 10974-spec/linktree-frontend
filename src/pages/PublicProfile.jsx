@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { userService } from '../services/userService';
+import { useParams, useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 import { linkService } from '../services/linkService';
 
 const PublicProfile = () => {
   const { username } = useParams();
+  const navigate = useNavigate();
+  const { user: currentUser } = useAuth();
   const [user, setUser] = useState(null);
   const [links, setLinks] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -16,15 +18,19 @@ const PublicProfile = () => {
 
   const fetchUserProfile = async () => {
     try {
-      // This would typically be a public API endpoint
-      // For now, we'll simulate by getting the current user's data
-      const userData = await userService.getPublicProfile(username);
-      const linksData = await linkService.getUserLinks(username);
-      
-      setUser(userData);
-      setLinks(linksData);
+      // If the username matches the current user, use their data
+      if (username === currentUser?.username) {
+        const linksData = await linkService.getLinks();
+        setUser(currentUser);
+        setLinks(linksData);
+      } else {
+        // For now, only show current user's profile
+        // In a real app, you'd fetch the public profile from API
+        setError('Profile not found');
+      }
     } catch (err) {
-      setError('Profile not found');
+      setError('Error loading profile');
+      console.error('Error fetching profile:', err);
     } finally {
       setLoading(false);
     }
@@ -33,7 +39,6 @@ const PublicProfile = () => {
   const handleLinkClick = async (linkId) => {
     try {
       await linkService.recordClick(linkId);
-      // Link click is recorded, now the actual navigation happens
     } catch (error) {
       console.error('Error recording click:', error);
     }
@@ -53,7 +58,13 @@ const PublicProfile = () => {
         <div className="text-center">
           <div className="text-6xl mb-4">😕</div>
           <h1 className="text-2xl font-bold text-gray-900 mb-2">Profile Not Found</h1>
-          <p className="text-gray-600">The profile you're looking for doesn't exist.</p>
+          <p className="text-gray-600 mb-4">The profile you're looking for doesn't exist.</p>
+          <button
+            onClick={() => navigate('/dashboard')}
+            className="btn-primary"
+          >
+            Back to Dashboard
+          </button>
         </div>
       </div>
     );
