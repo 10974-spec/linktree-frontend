@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const API_URL = window._GLOBAL_API_URL || 'https://biodeck-backend.onrender.com/api';
+const API_URL ='https://biodeck-backend.onrender.com/api';
+console.log('API URL:', API_URL);
 
 const api = axios.create({
   baseURL: API_URL,
