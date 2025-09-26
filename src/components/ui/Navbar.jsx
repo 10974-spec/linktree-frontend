@@ -58,7 +58,7 @@ const Navbar = () => {
                 target="_blank"
                 className="btn-primary text-sm"
               >
-                View My Profile
+                My Profile
               </Link>
             </div>
 

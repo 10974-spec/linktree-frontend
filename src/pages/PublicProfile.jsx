@@ -157,7 +157,7 @@ const PublicProfile = () => {
         {/* Footer */}
         <div className="mt-12 opacity-70">
           <p className="text-sm">@{profileUser.username}</p>
-          <p className="text-xs mt-1">Powered by LinkTree Clone</p>
+          <p className="text-xs mt-1">Powered by BioDeck</p>
         </div>
       </div>
     </div>
