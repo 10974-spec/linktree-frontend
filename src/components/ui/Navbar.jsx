@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
+import { SquareStack } from 'lucide-react';
 
 const Navbar = () => {
   const { user, logout } = useAuth();
@@ -21,8 +22,8 @@ const Navbar = () => {
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             <Link to="/dashboard" className="flex-shrink-0 flex items-center">
-              <span className="text-2xl">🌲</span>
-              <span className="ml-2 text-xl font-bold text-gray-900">LinkTree</span>
+              <span className="text-5xl"><SquareStack/></span>
+              <span className="ml-2 text-2xl font-bold text-blue-900">BioDeck</span>
             </Link>
             
             <div className="hidden md:ml-6 md:flex md:space-x-4">

@@ -102,7 +102,7 @@ const Register = () => {
                 type="password"
                 required
                 className="input-field mt-1"
-                placeholder="Enter your password"
+                placeholder="Password Must be 6 characters or more"
                 value={formData.password}
                 onChange={handleChange}
               />
