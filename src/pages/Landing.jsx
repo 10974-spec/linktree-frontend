@@ -1,36 +1,105 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
-import { Rocket, Star } from 'lucide-react';
+import { Rocket, Star, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Link2, Palette, BarChart3, Smartphone, Zap, Users, Shield, Globe } from 'lucide-react';
 
 const Landing = () => {
   const navigate = useNavigate();
   const { isAuthenticated } = useAuth();
   const [currentFeature, setCurrentFeature] = useState(0);
+  const [currentCard, setCurrentCard] = useState(0);
 
- const features = [
-  {
-    icon: <Link2 className="w-8 h-8 text-orange-600" />,
-    title: 'Beautiful Link Hub',
-    description: 'Create a stunning profile with all your important links in one place'
-  },
-  {
-    icon: <Palette className="w-8 h-8 text-blue-700" />,
-    title: 'Customizable Themes',
-    description: 'Personalize your profile with colors, fonts, and layouts that match your style'
-  },
-  {
-    icon: <BarChart3 className="w-8 h-8 text-green-700" />,
-    title: 'Smart Analytics',
-    description: 'Track clicks and understand your audience with detailed insights'
-  },
-  {
-    icon: <Smartphone className="w-8 h-8 text-pink-700" />,
-    title: 'Mobile Perfect',
-    description: 'Looks amazing on any device - desktop, tablet, or mobile'
-  }
-];
+  const features = [
+    {
+      icon: <Link2 className="w-8 h-8 text-orange-600" />,
+      title: 'Beautiful Link Hub',
+      description: 'Create a stunning profile with all your important links in one place'
+    },
+    {
+      icon: <Palette className="w-8 h-8 text-blue-700" />,
+      title: 'Customizable Themes',
+      description: 'Personalize your profile with colors, fonts, and layouts that match your style'
+    },
+    {
+      icon: <BarChart3 className="w-8 h-8 text-green-700" />,
+      title: 'Smart Analytics',
+      description: 'Track clicks and understand your audience with detailed insights'
+    },
+    {
+      icon: <Smartphone className="w-8 h-8 text-pink-700" />,
+      title: 'Mobile Perfect',
+      description: 'Looks amazing on any device - desktop, tablet, or mobile'
+    }
+  ];
+
+  const sampleCards = [
+    {
+      name: "Emma Johnson",
+      title: "Digital Creator & Educator",
+      gradient: "from-purple-600 to-pink-600",
+      bgGradient: "from-purple-900 to-pink-700",
+      avatar: "👩‍💻",
+      links: [
+        { name: "YouTube Channel", icon: "▶️" },
+        { name: "Instagram", icon: "📸" },
+        { name: "Portfolio", icon: "💼" },
+        { name: "Latest Project", icon: "🚀" }
+      ]
+    },
+    {
+      name: "Alex Chen",
+      title: "Tech Entrepreneur",
+      gradient: "from-blue-600 to-cyan-500",
+      bgGradient: "from-blue-900 to-cyan-700",
+      avatar: "👨‍💼",
+      links: [
+        { name: "Startup Website", icon: "🌐" },
+        { name: "LinkedIn", icon: "💼" },
+        { name: "AngelList", icon: "👼" },
+        { name: "Tech Blog", icon: "📝" }
+      ]
+    },
+    {
+      name: "Sarah Williams",
+      title: "Fashion Influencer",
+      gradient: "from-rose-500 to-orange-400",
+      bgGradient: "from-rose-800 to-orange-600",
+      avatar: "👗",
+      links: [
+        { name: "TikTok", icon: "🎵" },
+        { name: "Style Guide", icon: "👠" },
+        { name: "Shop My Looks", icon: "🛍️" },
+        { name: "Brand Collabs", icon: "🤝" }
+      ]
+    },
+    {
+      name: "Mike Rodriguez",
+      title: "Fitness Coach",
+      gradient: "from-green-500 to-emerald-600",
+      bgGradient: "from-green-800 to-emerald-700",
+      avatar: "💪",
+      links: [
+        { name: "Workout Plans", icon: "🏋️" },
+        { name: "Nutrition Guide", icon: "🥗" },
+        { name: "YouTube", icon: "🎥" },
+        { name: "1-on-1 Coaching", icon: "👥" }
+      ]
+    },
+    {
+      name: "Priya Patel",
+      title: "Travel Blogger",
+      gradient: "from-amber-500 to-red-500",
+      bgGradient: "from-amber-800 to-red-700",
+      avatar: "✈️",
+      links: [
+        { name: "Travel Blog", icon: "📖" },
+        { name: "Photo Gallery", icon: "📷" },
+        { name: "Travel Tips", icon: "💡" },
+        { name: "Booking Deals", icon: "🎫" }
+      ]
+    }
+  ];
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -45,6 +114,18 @@ const Landing = () => {
 
     return () => clearInterval(interval);
   }, []);
+
+  const nextCard = () => {
+    setCurrentCard((prev) => (prev + 1) % sampleCards.length);
+  };
+
+  const prevCard = () => {
+    setCurrentCard((prev) => (prev - 1 + sampleCards.length) % sampleCards.length);
+  };
+
+  const goToCard = (index) => {
+    setCurrentCard(index);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
@@ -81,7 +162,7 @@ const Landing = () => {
       <section className="px-4 sm:px-6 lg:px-8 py-20">
         <div className="max-w-7xl mx-auto text-center">
           <div className="inline-flex items-center px-4 py-2 rounded-full bg-blue-100 text-blue-600 text-sm font-medium mb-6">
-            <Rocket/> The modern link-in-bio platform
+            <Rocket className="w-4 h-4 mr-2"/> The modern link-in-bio platform
           </div>
           
           <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6">
@@ -109,36 +190,107 @@ const Landing = () => {
             </button>
           </div>
 
-          {/* Hero Preview */}
-          <div className="relative max-w-4xl mx-auto">
+          {/* Carousel Section */}
+          <div className="relative max-w-4xl mx-auto mb-20">
             <div className="absolute inset-0 bg-gradient-to-r from-blue-200 to-purple-200 rounded-3xl blur-3xl opacity-30"></div>
+            
+            {/* Carousel Container */}
             <div className="relative bg-white rounded-3xl shadow-2xl p-8">
-              <div className="bg-gradient-to-br from-gray-900 to-gray-700 rounded-2xl p-8 text-white">
-                <div className="flex items-center space-x-4 mb-6">
-                  <div className="w-16 h-16 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full flex items-center justify-center">
-                    <span className="text-2xl">👤</span>
-                  </div>
-                  <div className="text-left">
-                    <h3 className="text-xl font-bold">Emma Johnson</h3>
-                    <p className="text-gray-300">Digital Creator & Educator</p>
-                  </div>
+              {/* Carousel Navigation */}
+              <div className="flex justify-between items-center mb-6">
+                <button 
+                  onClick={prevCard}
+                  className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
+                >
+                  <ChevronLeft className="w-5 h-5" />
+                </button>
+                
+                <div className="flex space-x-2">
+                  {sampleCards.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => goToCard(index)}
+                      className={`w-2 h-2 rounded-full transition-all ${
+                        index === currentCard ? 'bg-blue-600 scale-125' : 'bg-gray-300'
+                      }`}
+                    />
+                  ))}
                 </div>
                 
-                <div className="space-y-3">
-                  {['YouTube Channel', 'Instagram', 'Portfolio', 'Latest Project'].map((link, index) => (
+                <button 
+                  onClick={nextCard}
+                  className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
+                >
+                  <ChevronRight className="w-5 h-5" />
+                </button>
+              </div>
+
+              {/* Carousel Content */}
+              <div className="relative overflow-hidden rounded-2xl">
+                <div 
+                  className="flex transition-transform duration-500 ease-in-out"
+                  style={{ transform: `translateX(-${currentCard * 100}%)` }}
+                >
+                  {sampleCards.map((card, index) => (
                     <div 
                       key={index}
-                      className="bg-white/10 backdrop-blur-sm rounded-xl p-4 hover:bg-white/20 transition-all duration-200 cursor-pointer"
+                      className="w-full flex-shrink-0"
                     >
-                      <div className="flex items-center justify-between">
-                        <span>{link}</span>
-                        <span>→</span>
+                      <div className={`bg-gradient-to-br ${card.bgGradient} rounded-2xl p-8 text-white`}>
+                        <div className="flex items-center space-x-4 mb-6">
+                          <div className={`w-16 h-16 bg-gradient-to-r ${card.gradient} rounded-full flex items-center justify-center text-2xl`}>
+                            {card.avatar}
+                          </div>
+                          <div className="text-left">
+                            <h3 className="text-xl font-bold">{card.name}</h3>
+                            <p className="text-gray-300">{card.title}</p>
+                          </div>
+                        </div>
+                        
+                        <div className="space-y-3">
+                          {card.links.map((link, linkIndex) => (
+                            <div 
+                              key={linkIndex}
+                              className="bg-white/10 backdrop-blur-sm rounded-xl p-4 hover:bg-white/20 transition-all duration-200 cursor-pointer group"
+                            >
+                              <div className="flex items-center justify-between">
+                                <div className="flex items-center space-x-3">
+                                  <span className="text-lg">{link.icon}</span>
+                                  <span>{link.name}</span>
+                                </div>
+                                <span className="group-hover:translate-x-1 transition-transform">→</span>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
                       </div>
                     </div>
                   ))}
                 </div>
               </div>
+
+              {/* Card Indicator */}
+              <div className="mt-4 text-center">
+                <span className="text-sm text-gray-600">
+                  {currentCard + 1} of {sampleCards.length} sample profiles
+                </span>
+              </div>
             </div>
+          </div>
+
+          {/* Quick Stats */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-2xl mx-auto">
+            {[
+              { number: "10K+", label: "Active Users" },
+              { number: "50K+", label: "Links Created" },
+              { number: "1M+", label: "Monthly Clicks" },
+              { number: "99%", label: "Satisfaction" }
+            ].map((stat, index) => (
+              <div key={index} className="text-center">
+                <div className="text-2xl font-bold text-gray-900 mb-1">{stat.number}</div>
+                <div className="text-sm text-gray-600">{stat.label}</div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
