@@ -11,6 +11,7 @@ import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
 import Analytics from './pages/Analytics';
 import PublicProfile from './pages/PublicProfile';
+import Landing from './pages/Landing';
 
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated, loading } = useAuth();
@@ -40,6 +41,8 @@ function AppContent() {
       {isAuthenticated && <Navbar />}
       <main className={isAuthenticated ? 'pt-16' : ''}>
         <Routes>
+
+          <Route path="/" element={<Landing />} />
           {/* Public Routes */}
           <Route path="/:username" element={<PublicProfile />} />
           <Route path="/login" element={

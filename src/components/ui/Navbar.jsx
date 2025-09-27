@@ -21,10 +21,12 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
-            <Link to="/dashboard" className="flex-shrink-0 flex items-center">
-              <span className="text-5xl"><SquareStack/></span>
-              <span className="ml-2 text-2xl font-bold text-blue-900">BioDeck</span>
-            </Link>
+          <Link to="/" className="flex-shrink-0 flex items-center">
+  <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+    <span className="text-white font-bold text-lg">B</span>
+  </div>
+  <span className="ml-2 text-xl font-bold text-gray-900">BioDeck</span>
+</Link>
             
             <div className="hidden md:ml-6 md:flex md:space-x-4">
               {navigation.map((item) => (
