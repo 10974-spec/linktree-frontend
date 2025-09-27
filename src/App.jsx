@@ -20,7 +20,7 @@ const ProtectedRoute = ({ children }) => {
     return <LoadingSpinner />;
   }
   
-  return isAuthenticated ? children : <Navigate to="/login" />;
+  return isAuthenticated ? children : <Navigate to="/" />;
 };
 
 const PublicRoute = ({ children }) => {
