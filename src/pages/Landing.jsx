@@ -1,34 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
+import { Rocket, Star } from 'lucide-react';
+import { Link2, Palette, BarChart3, Smartphone, Zap, Users, Shield, Globe } from 'lucide-react';
 
 const Landing = () => {
   const navigate = useNavigate();
   const { isAuthenticated } = useAuth();
   const [currentFeature, setCurrentFeature] = useState(0);
 
-  const features = [
-    {
-      icon: '🔗',
-      title: 'Beautiful Link Hub',
-      description: 'Create a stunning profile with all your important links in one place'
-    },
-    {
-      icon: '🎨',
-      title: 'Customizable Themes',
-      description: 'Personalize your profile with colors, fonts, and layouts that match your style'
-    },
-    {
-      icon: '📊',
-      title: 'Smart Analytics',
-      description: 'Track clicks and understand your audience with detailed insights'
-    },
-    {
-      icon: '📱',
-      title: 'Mobile Perfect',
-      description: 'Looks amazing on any device - desktop, tablet, or mobile'
-    }
-  ];
+ const features = [
+  {
+    icon: <Link2 className="w-8 h-8 text-orange-600" />,
+    title: 'Beautiful Link Hub',
+    description: 'Create a stunning profile with all your important links in one place'
+  },
+  {
+    icon: <Palette className="w-8 h-8 text-blue-700" />,
+    title: 'Customizable Themes',
+    description: 'Personalize your profile with colors, fonts, and layouts that match your style'
+  },
+  {
+    icon: <BarChart3 className="w-8 h-8 text-green-700" />,
+    title: 'Smart Analytics',
+    description: 'Track clicks and understand your audience with detailed insights'
+  },
+  {
+    icon: <Smartphone className="w-8 h-8 text-pink-700" />,
+    title: 'Mobile Perfect',
+    description: 'Looks amazing on any device - desktop, tablet, or mobile'
+  }
+];
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -61,7 +63,7 @@ const Landing = () => {
           <div className="flex items-center space-x-4">
             <Link 
               to="/login" 
-              className="text-gray-600 hover:text-gray-900 font-medium transition-colors"
+              className="text-gray-600 hover:text-gray-900 font-medium border border-blue-600 transition-colors rounded-full px-6 py-2 hover:bg-blue-50"
             >
               Sign In
             </Link>
@@ -79,7 +81,7 @@ const Landing = () => {
       <section className="px-4 sm:px-6 lg:px-8 py-20">
         <div className="max-w-7xl mx-auto text-center">
           <div className="inline-flex items-center px-4 py-2 rounded-full bg-blue-100 text-blue-600 text-sm font-medium mb-6">
-            🚀 The modern link-in-bio platform
+            <Rocket/> The modern link-in-bio platform
           </div>
           
           <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6">

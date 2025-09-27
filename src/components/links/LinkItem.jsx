@@ -1,3 +1,4 @@
+import { Pencil, Trash } from 'lucide-react';
 import React from 'react';
 
 const LinkItem = ({ link, onEdit, onDelete }) => {
@@ -25,14 +26,14 @@ const LinkItem = ({ link, onEdit, onDelete }) => {
           className="p-2 text-gray-400 hover:text-blue-600 transition-colors"
           title="Edit link"
         >
-          ✏️
+          <Pencil/>
         </button>
         <button
           onClick={() => onDelete(link._id)}
           className="p-2 text-gray-400 hover:text-red-600 transition-colors"
           title="Delete link"
         >
-          🗑️
+          <Trash/>
         </button>
       </div>
     </div>

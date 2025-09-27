@@ -1,18 +1,30 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
-import { SquareStack } from 'lucide-react';
+import { BarChart3, LayoutDashboard, SquareStack, User } from 'lucide-react';
 
 const Navbar = () => {
   const { user, logout } = useAuth();
   const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const navigation = [
-    { name: 'Dashboard', href: '/dashboard', icon: '📊' },
-    { name: 'Profile', href: '/profile', icon: '👤' },
-    { name: 'Analytics', href: '/analytics', icon: '📈' },
-  ];
+const navigation = [
+  { 
+    name: 'Dashboard', 
+    href: '/dashboard', 
+    icon: <LayoutDashboard className="w-5 h-5" />
+  },
+  { 
+    name: 'Profile', 
+    href: '/profile', 
+    icon: <User className="w-5 h-5" />
+  },
+  { 
+    name: 'Analytics', 
+    href: '/analytics', 
+    icon: <BarChart3 className="w-5 h-5" />
+  },
+];
 
   const isActive = (path) => location.pathname === path;
 
